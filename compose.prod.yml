@@ -1,13 +1,24 @@
+# ---------------------
+# Common
+# ---------------------
+
+x-common: &common
+  build:
+    target: "production"
+  volumes: !override []
+
+
+
+# ---------------------
+# Services
+# ---------------------
+
 services:
 
   backend:
-    build:
-      target: "production"
-    volumes: !reset []
+    <<: *common
     command: ["pnpm backend serve"]
 
   frontend:
-    build:
-      target: "production"
-    volumes: !reset []
+    <<: *common
     command: ["pnpm frontend build && PORT=${FRONTEND_PORT} node ./packages/frontend/dist/server/entry.mjs"]
