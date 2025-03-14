@@ -9,7 +9,7 @@ ARG PNPM_DIR=/root/pnpm
 RUN pnpm config set store-dir ${PNPM_DIR} --global
 
 WORKDIR ${WORK_DIR}
-ENTRYPOINT ["sh", "-c"]
+ENTRYPOINT ["bash", "-c"]
 
 
 

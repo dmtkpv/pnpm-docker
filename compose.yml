@@ -12,17 +12,15 @@ volumes:
 # ---------------------
 
 x-common: &common
-  build:
-    context: .
-    target: "base"
-    args:
-      WORK_DIR: ${WORK_DIR}
-      PNPM_DIR: ${PNPM_DIR}
+  image: "pnpm-docker"
+  pull_policy: never
   volumes:
     - pnpm_store:${PNPM_DIR}
     - ./:${WORK_DIR}
   env_file:
     - .env
+  depends_on:
+    - base
 
 
 
@@ -31,6 +29,16 @@ x-common: &common
 # ---------------------
 
 services:
+
+  base:
+    image: "pnpm-docker"
+    command: "sleep infinity"
+    build:
+      context: .
+      target: "base"
+      args:
+        WORK_DIR: ${WORK_DIR}
+        PNPM_DIR: ${PNPM_DIR}
 
   backend:
     <<: *common
