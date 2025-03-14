@@ -1,0 +1,11 @@
+{
+  "name": "@this/backend",
+  "type": "module",
+  "scripts": {
+    "serve": "node server.js"
+  },
+  "dependencies": {
+    "@this/shared": "workspace:^",
+    "express": "^4.21.2"
+  }
+}

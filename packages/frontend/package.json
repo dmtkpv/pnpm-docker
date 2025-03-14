@@ -1,0 +1,14 @@
+{
+  "name": "@this/frontend",
+  "type": "module",
+  "scripts": {
+    "serve": "astro dev",
+    "build": "astro build"
+  },
+  "dependencies": {
+    "@astrojs/node": "^9.1.3",
+    "@this/shared": "workspace:^",
+    "astro": "^5.5.2",
+    "express": "^4.21.2"
+  }
+}

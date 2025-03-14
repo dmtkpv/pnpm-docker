@@ -1,0 +1,11 @@
+.idea
+.astro
+.dockerignore
+.env
+.git
+.gitignore
+Dockerfile
+compose.prod.yml
+compose.yml
+node_modules
+dist

@@ -1,0 +1,12 @@
+---
+    import { VERSION } from '@this/shared/constants'
+    const { BACKEND_URL } = import.meta.env;
+    const response = await fetch(BACKEND_URL);
+    const data = await response.json();
+---
+<html>
+<body>
+    <p>Version: {VERSION}</p>
+    <h1>{data.title}</h1>
+</body>
+</html>

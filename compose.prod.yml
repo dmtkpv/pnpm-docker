@@ -1,0 +1,13 @@
+services:
+
+  backend:
+    build:
+      target: "production"
+    volumes: !reset []
+    command: ["pnpm backend serve"]
+
+  frontend:
+    build:
+      target: "production"
+    volumes: !reset []
+    command: ["pnpm frontend build && PORT=${FRONTEND_PORT} node ./packages/frontend/dist/server/entry.mjs"]

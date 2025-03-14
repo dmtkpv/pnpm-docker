@@ -1,0 +1,8 @@
+{
+  "type": "module",
+  "scripts": {
+    "backend": "pnpm --filter @this/backend",
+    "frontend": "pnpm --filter @this/frontend",
+    "shared": "pnpm --filter @this/shared"
+  }
+}

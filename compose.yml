@@ -1,0 +1,45 @@
+# ---------------------
+# Volumes
+# ---------------------
+
+volumes:
+  pnpm_store:
+
+
+
+# ---------------------
+# Common
+# ---------------------
+
+x-common: &common
+  build:
+    context: .
+    target: "base"
+    args:
+      WORK_DIR: ${WORK_DIR}
+      PNPM_DIR: ${PNPM_DIR}
+  volumes:
+    - pnpm_store:${PNPM_DIR}
+    - ./:${WORK_DIR}
+  env_file:
+    - .env
+
+
+
+# ---------------------
+# Services
+# ---------------------
+
+services:
+
+  backend:
+    <<: *common
+    command: ["pnpm backend install && pnpm backend serve"]
+    ports:
+      - "${BACKEND_PORT}:${BACKEND_PORT}"
+
+  frontend:
+    <<: *common
+    command: ["pnpm frontend install && pnpm frontend serve"]
+    ports:
+      - "${FRONTEND_PORT}:${FRONTEND_PORT}"
