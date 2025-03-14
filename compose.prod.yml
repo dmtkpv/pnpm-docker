@@ -3,6 +3,8 @@
 # ---------------------
 
 x-common: &common
+  build:
+    target: "production"
   volumes: !override []
 
 
@@ -12,11 +14,6 @@ x-common: &common
 # ---------------------
 
 services:
-
-  base:
-    command: ":"
-    build:
-      target: "production"
 
   backend:
     <<: *common
