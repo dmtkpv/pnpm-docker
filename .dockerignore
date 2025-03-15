@@ -9,3 +9,4 @@ compose.prod.yml
 compose.yml
 node_modules
 dist
+pruned

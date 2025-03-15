@@ -3,9 +3,8 @@
 # ---------------------
 
 x-common: &common
-  build:
-    target: "production"
-  volumes: !override []
+  volumes: !override
+    - pnpm_store:${PNPM_DIR}
 
 
 
@@ -17,8 +16,12 @@ services:
 
   backend:
     <<: *common
-    command: ["pnpm backend serve"]
+    build:
+      target: "backend"
+    command: ["node server"]
 
   frontend:
     <<: *common
-    command: ["pnpm frontend build && PORT=${FRONTEND_PORT} node ./packages/frontend/dist/server/entry.mjs"]
+    build:
+      target: "frontend"
+    command: ["PORT=${FRONTEND_PORT} node ./dist/server/entry.mjs"]
