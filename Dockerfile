@@ -1,12 +1,8 @@
-ARG PNPM_IMAGE=22-10
-
-
-
 # ---------------------
 # Base
 # ---------------------
 
-FROM guergeiro/pnpm:${PNPM_IMAGE} AS base
+FROM guergeiro/pnpm:22-10-slim AS base
 
 ARG WORK_DIR=/app
 ARG PNPM_DIR=/root/pnpm

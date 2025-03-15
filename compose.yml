@@ -18,7 +18,6 @@ x-common: &common
     args:
       WORK_DIR: ${WORK_DIR}
       PNPM_DIR: ${PNPM_DIR}
-      PNPM_IMAGE: ${PNPM_IMAGE}
   volumes:
     - pnpm_store:${PNPM_DIR}
     - ./:${WORK_DIR}
