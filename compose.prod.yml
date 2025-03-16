@@ -17,11 +17,15 @@ services:
   backend:
     <<: *common
     build:
-      target: "backend"
+      target: "production"
+      args:
+        PACKAGE: "backend"
     command: ["node server"]
 
   frontend:
     <<: *common
     build:
-      target: "frontend"
+      target: "production"
+      args:
+        PACKAGE: "frontend"
     command: ["PORT=${FRONTEND_PORT} node ./dist/server/entry.mjs"]

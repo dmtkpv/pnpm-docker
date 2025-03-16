@@ -1,11 +1,16 @@
+ARG WORK_DIR=/app
+ARG PNPM_DIR=/root/pnpm
+
+
+
 # ---------------------
 # Base
 # ---------------------
 
 FROM guergeiro/pnpm:22-10-slim AS base
 
-ARG WORK_DIR=/app
-ARG PNPM_DIR=/root/pnpm
+ARG WORK_DIR
+ARG PNPM_DIR
 RUN pnpm config set store-dir ${PNPM_DIR} --global
 
 WORKDIR ${WORK_DIR}
@@ -30,24 +35,20 @@ COPY . .
 
 
 # ---------------------
-# Backend
+# Prune
 # ---------------------
 
-FROM data AS backend-prune
-RUN pnpm backend --prod deploy --legacy pruned/backend
-
-FROM base AS backend
-COPY --from=backend-prune ${WORK_DIR}/pruned/backend ./
+FROM data AS prune
+ARG PACKAGE
+RUN pnpm ${PACKAGE} --prod deploy --legacy pruned/${PACKAGE}
 
 
 
 # ---------------------
-# Frontend
+# Production
 # ---------------------
 
-FROM data AS frontend-prune
-RUN pnpm frontend --prod deploy --legacy pruned/frontend
-
-FROM base AS frontend
-COPY --from=frontend-prune ${WORK_DIR}/pruned/frontend ./
-RUN pnpm run build
+FROM base AS production
+ARG PACKAGE
+COPY --from=prune ${WORK_DIR}/pruned/${PACKAGE} ./
+RUN if [ "$PACKAGE" = "frontend" ]; then pnpm run build; fi
